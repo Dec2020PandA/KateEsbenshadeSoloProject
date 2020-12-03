@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up for SustainMe</title>
+    {% load static %}
+    <style>
+         #container{
+            background-color: rgb(185, 245, 151);
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            overflow: scroll;
+        }
+        #register{
+            margin: 20px auto;
+            width: 300px;
+            padding: 0px 10px 10px 10px; 
+        }
+        img{
+            width: 100%;
+            height: 600px;
+            border-radius: 25px;
+        }
+        #sustain_logo{
+            font-size: 80px;
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgb(2, 119, 2);
+            text-shadow: 4px 4px black;
+            padding: 10px;
+            border-radius: 25px;
+            font-family: Helvetica, sans-serif;
+        }
+        #sustain_description{
+            font-size: 30px;
+            position: absolute;
+            top: 250px;
+            left: 25%;
+            color: rgb(185, 245, 151);
+            text-shadow: 3px 3px black;
+            padding: 10px;
+            border-radius: 15px;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+        }
+        #register{
+            margin: 5px auto;
+            width: 100%;
+            height: 430px;
+            padding: 20px 0px;
+            font-family: Helvetica, sans-serif;
+            background-image: radial-gradient(rgb(194, 245, 194), rgb(2, 97, 2));
+            border-radius: 25px;
+        }
+        .input{
+            width: 200px;
+            margin: 0px auto;
+            padding: 5px 0px;
+
+        }
+        #register h2{
+            width: 100px;
+            margin: 0px auto;
+        }
+        #login_page{
+            margin: 5px auto;
+            width: 300px;
+            font-family: Helvetica, sans-serif;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id=container>
+        <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >
+        <h1 id=sustain_logo>SustainMe</h1>
+        <p id=sustain_description>Transportation <> Food <> Diet <> Waste <> Nature </p>
+        <div id=register>
+            <h2>Register</h2>
+            <form action="/create_user" method="POST">
+                {% csrf_token %}
+                <div class=input>First Name: <input type="text" name="first_name"></div>
+                <div class=input>Last Name: <input type="text" name="last_name"></div>
+                <div class=input>Email Address:<input type="email" name="email"></div>
+                <div class=input>Description: <input type="text" name="description"></div>
+                <div class=input>Location (city and state): <input type="text" name="location"></div>
+                <div class=input>Password: <input type="password" name="password"></div>
+                <div class=input>Confirm Password: <input type="password" name="confirm_password"></div>
+                <div class=input><input type="submit" value="Register"></div>
+                <div id=login_page><a href="/">Already have an account? Log in here!</a></div>
+            </form>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{message.tags }}" {% endif%}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
