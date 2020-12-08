@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why This Matters</title>
+    {% load static %}
+    <style>
+        * {
+            font-family: Helvetica, sans-serif;
+        }
+        #container{
+            background-color: rgb(185, 245, 151);
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            overflow-x: scroll;
+            overflow-y: scroll;
+        }
+        #logout{
+            margin: 0px 0px 3px 95%;
+        }
+        #header img{
+            width: 100%;
+            height: 500px;
+            border-radius: 25px;
+        }
+        #sustain_logo{
+            font-size: 80px;
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgb(2, 119, 2);
+            text-shadow: 4px 4px black;
+            padding: 10px;
+            border-radius: 25px;
+            font-family: Helvetica, sans-serif;
+        }
+        #sustain_description{
+            font-size: 30px;
+            position: absolute;
+            top: 250px;
+            left: 25%;
+            color: rgb(185, 245, 151);
+            text-shadow: 3px 3px black;
+            padding: 10px;
+            border-radius: 15px;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+        }
+        #nav_bar {
+            position: absolute;
+            top: 400px;
+            left: 23%;
+            list-style-type: none;
+            margin: 0;
+            padding: 20px 100px;
+            background-image: linear-gradient(rgb(185, 245, 151), rgb(73, 114, 49));
+            border-radius: 15px;
+
+        }
+        #header li{
+            display: inline;
+            font-size: 20px;
+            font-family: Helvetica, sans-serif;
+        }
+        #header .nav a{
+            color: black;
+            text-decoration: none;
+            font-family: Helvetica, sans-serif;
+        }
+        .in_between{
+            color:rgb(73, 114, 49);
+            font-family: Helvetica, sans-serif;
+            padding: 0px 5px;
+        }
+        #content{
+            background-image: linear-gradient(rgb(73, 114, 49), rgb(185, 245, 151));
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 10px 0px;
+        }
+        #content h1{
+            margin: 7px 37%;
+        }
+        #content h3{
+            margin: 7px 25%;
+        }
+        #content p{
+            margin: 15px 10%;
+            font-size: 15px;
+        }
+        #stats {
+            margin: 15px 30%;
+        }
+        #content li{
+            display: block;
+            font-size: 15px;
+        }
+        #images{
+            margin: 10px auto;
+            width: 1120px;
+        }
+        #images img{
+            width: 200px;
+            border-radius: 8px;
+            box-shadow: 5px 5px 2px gray;
+            margin: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id=container>
+        <a id=logout href="/logout">Logout</a>
+        <div id=header>
+            <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >
+            <h1 id=sustain_logo>SustainMe</h1>
+            <p id=sustain_description>Transportation <> Food <> Home <> Waste <> Nature </p>
+            <ul id=nav_bar>
+                <li class=nav><a href="/home">Actions Page</a></li>
+                <li class = in_between> | </li>
+                <li class=nav><a href="/why_this_matters">Why this Matters</a></li>
+                <li class = in_between> | </li>
+                <li class=nav><a href="/totals">Total Actions</a></li>
+                <li class = in_between> | </li>
+                <li class=nav><a href="/add">Add an Action</a></li>
+            </ul>
+        </div>
+        <div id=content>
+            <h1>Why Does this Matter?</h1>
+            <h3>If humans can create the climate crisis, we have the power to solve it too</h3>
+            <p>In order to prevent irreversalbe climate damage to our earth, we as humans must reduce our carbon dioxide emssisions significantly in the next ten years. These emissions stem from every part of human life - our diet, our consumption, our travel, and so much more.</p>
+            <ul id=stats>
+                <li>28% of global greenhouse gass emissions come from transportation</li>
+                <li>10% of global greenhouse gass emissions come from agriculture </li>
+                <li>27% of global greenhouse gass emissions come from electricity</li>
+            </ul>
+            <p>Many of you may be thinking that it is corporations and governments that need to change - and that is true! But that does not mean that we, as individuals, cannot make a substantial impact on our own. Switching your diet to vegetarian can, on average, reduce your personal emissions by 30%. And if everyone did that, there would be a massive impact. As you can see above, 27% of emissions are from electricity - what if you installed solar panals or moved to 100% renewable energy? So yes, in order to fully combat this crisis, corporations and factories need to change and governments need to set regulations, but each of us can have a major impact as well. </p>
+            <p>And that is where SustainMe comes in! Changing your lifestyle to become more environmentally friendly can be daunting, but a community can help. Other than doing meatless Mondays, what else can you do? You want to get a new, electrical car, but which ones are best? Connect with fellow tree huggers to collaborate on how to be more sustainable, and contribute to this fight for the future.</p>
+            <div id=images>
+                <img src={% static "/images/biking.jpg" %} alt="Bike" >
+                <img src={% static "/images/compost.jpg" %} alt="Compost" >
+                <img src={% static "/images/solar.jpg" %} alt="Solar" >
+                <img src={% static "/images/transport.jpg" %} alt="Transportation" >
+                <img src={% static "/images/vegetarian.jpg" %} alt="Vegetarian" >
+            </div>
+        </div>
+   </div>
+</body>
+</html>
