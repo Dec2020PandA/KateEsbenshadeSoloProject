@@ -14,7 +14,7 @@ class UserManager(models.Manager):
         if len(postData['password'])<1:
                 errors['password'] = "Password must be at least 1 character"
         if postData["password"] != postData["confirm_password"]:
-            errors["confirm_password"] = "Password and confirm password must match"
+            errors["confirm_password"] = "Password and confirm password must match (changed)"
         return errors
 
 class User(models.Model):
