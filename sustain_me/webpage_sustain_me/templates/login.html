@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <style>
+        #container{
+            background-color: rgb(185, 245, 151);
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            overflow: scroll;
+        }
+        #login{
+            margin: 5px auto;
+            width: 100%;
+            height: 200px;
+            padding: 20px 0px;
+            font-family: Helvetica, sans-serif;
+            background-image: radial-gradient(rgb(194, 245, 194), rgb(2, 97, 2));
+            border-radius: 25px;
+        }
+        #sign_up{
+            margin: 5px auto;
+            width: 250px;
+            font-family: Helvetica, sans-serif;
+        }
+        img{
+            width: 100%;
+            height: 600px;
+            border-radius: 25px;
+        }
+        #sustain_logo{
+            font-size: 80px;
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgb(2, 119, 2);
+            text-shadow: 4px 4px black;
+            padding: 10px;
+            border-radius: 25px;
+            font-family: Helvetica, sans-serif;
+        }
+        #sustain_description{
+            font-size: 30px;
+            position: absolute;
+            top: 250px;
+            left: 25%;
+            color: rgb(185, 245, 151);
+            text-shadow: 3px 3px black;
+            padding: 10px;
+            border-radius: 15px;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+        }
+        .input{
+            padding: 5px 0px;
+        }
+        #login h3{
+            margin: 5px auto;
+            width: 56px;
+        }
+        #login .input{
+            margin: 5px auto;
+            width: 250px;
+        }
+        #login .password{
+            margin: 5px auto;
+            width: 245px;
+        }
+        #login .submit{
+            margin: 10px auto;
+            width: 55px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id=container>
+        <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >
+        <h1 id=sustain_logo>SustainMe</h1>
+        <p id=sustain_description>Transportation <> Food <> Diet <> Waste <> Nature </p>
+        <div id=login>
+            <h3>Login:</h3>
+            <form action="/login" method="POST"> 
+                {% csrf_token %}
+                <div class=input>Email: <input type="email" name="login_email"></div>
+                <div class=password>Password: <input type="password" name="login_password"></div>
+                <div class=submit><input type="submit" value="Log In"></div>
+            </form>
+            <div id=sign_up><a href='/sign_up'>New to SustainMe? Sign up here!</a></div>
+        </div>
+    </div>
+</body>
+</html>
