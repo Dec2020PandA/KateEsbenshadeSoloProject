@@ -15,4 +15,6 @@ urlpatterns = [
     path('add', views.add_action_page),
 
     path('process_action', views.process_action),
+
+    path('profile/<int:id>', views.profile),
 ]

@@ -66,7 +66,10 @@ def why(request):
 
 
 def totals(request):
-    return render(request, "totals.html")
+    context = {
+        'actions' : Action.objects.all
+    }
+    return render(request, "totals.html", context)
 
 def add_action_page(request):
     return render(request, "add_action_page.html")
@@ -81,3 +84,9 @@ def process_action(request):
         )
         return redirect('/add')
     return redirect('/add')
+
+def profile(request, id):
+    context = {
+        'user' : User.objects.get(id=id)
+    }
+    return render(request, 'profile.html', context)

@@ -13,6 +13,9 @@
             height: 100%;
             overflow: scroll;
         }
+        #logout{
+            margin: 0px 0px 3px 95%;
+        }
         img{
             width: 100%;
             height: 500px;
@@ -72,6 +75,7 @@
 </head>
 <body>
     <div id=container>
+        <a id=logout href="/logout">Logout</a>
         <header>
             <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >
             <h1 id=sustain_logo>SustainMe</h1>
@@ -87,6 +91,10 @@
             </ul>
         </header>
         TOTALS
+        {{% for action in actions:
+                count+=1
+        %}}
+        Total Actions: {{count}}
    </div>
 </body>
 </html>
