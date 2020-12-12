@@ -14,7 +14,19 @@
             overflow: scroll;
         }
         #logout{
-            margin: 0px 0px 3px 95%;
+            display: inline-block;
+            background-color: gray;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #to_do{
+            margin: 0px 0px 10px 85%;
+            display: inline-block;
+            background-color: gray;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
         }
         img{
             width: 100%;
@@ -75,6 +87,7 @@
 </head>
 <body>
     <div id=container>
+        <a id=to_do href="/to_do_list">Your To Do List</a>
         <a id=logout href="/logout">Logout</a>
         <header>
             <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >

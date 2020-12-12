@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Test</title>
+    <style>
+        #map {
+          height: 100%;
+        }
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+</head>
+<body>
+    <h1>Map Test</h1>
+    <div id=map></div>
+
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxIQPiRwYwbqSnZ6c3MXEO4BOn8b6WNWg&callback=initMap"
+  type="text/javascript"></script>
+  <script>
+      function initMap() {
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': "California"}, function(results, status) {
+            if (status == 'OK') {
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 4,
+                    center: results[0].geometry.location,
+                });
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            }
+            else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+        console.log("Error at alert")
+      }
+  </script>
+
+</body>
+</html>

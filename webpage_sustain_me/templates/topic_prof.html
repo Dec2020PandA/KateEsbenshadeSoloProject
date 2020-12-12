@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add an Action!</title>
+    <title>{{user.first_name}}'s Profile</title>
     {% load static %}
     <style>
         *{
@@ -86,11 +86,22 @@
             font-family: Helvetica, sans-serif;
             padding: 0px 5px;
         }
+        .action{
+            border: 2px solid black;
+            padding: 5px 20px;
+            margin: 15px;
+            background-image: radial-gradient(cadetblue, white);
+            box-shadow: 10px 10px 3px gray;
+        }
         #content{
             background-image: linear-gradient(rgb(73, 114, 49), rgb(185, 245, 151));
             padding: 5px 10px;
             border-radius: 15px;
             margin: 10px 0px;
+        }
+        #info{
+            width: 200px;
+            margin: 5px auto;
         }
     </style>
 </head>
@@ -113,23 +124,16 @@
             </ul>
         </div>
         <div id=content>
-            <h1>Add an Action!</h1>
-            <form id="add_action" action="/process_action" method="POST">
-                {% csrf_token %}
-                    Title:<input type="text" name="title">
-                    <br>
-                    Topic: <select name="topic">
-                        <option value="Transportation">Transportation</option>
-                        <option value="Diet">Food and Diet</option>
-                        <option value="Improvements">Home Improvements</option>
-                        <option value="Waste">Waste</option>
-                        <option value="Nature">Nature</option>
-                    </select>
-                    <br>
-                    Description:<textarea name="description" cols=40 rows=10></textarea>
-                    <input id="add_action" type=submit value="Submit">
-                </form>
-            </form>
+            <div id=info>
+                <h3>{{topic}}</h3>
+            </div>
+            {% for action in topic %}
+                <div class=action>
+                    <h4>{{action.title}}</h4>
+                    <a href='/profile/{{action.topic}}'>{{action.topic}}</a>
+                    <p>{{action.description}}</p>
+                </div>
+            {% endfor %}
         </div>
    </div>
 </body>

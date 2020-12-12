@@ -90,3 +90,41 @@ def profile(request, id):
         'user' : User.objects.get(id=id)
     }
     return render(request, 'profile.html', context)
+
+def topic_prof(request, topic):
+    context = {
+        'topic': Action.getElementsByName('<topic>')
+    }
+    return render(request, 'topic_prof.html', context)
+
+def action_prof(request, action_id):
+    context = {
+        'action': Action.objects.get(id=action_id)
+    }
+    return render(request, 'action_prof.html', context)
+
+def add_to_do(request, id):
+    user = User.objects.get(id=request.session["user_id"])
+    action = Action.objects.get(id=id)
+    print(id)
+    user.actions_to_do.add(action)
+    print(user)
+    print(action.favorited_by)
+    return redirect('/home')
+
+def remove_to_do(request, id):
+    user = User.objects.get(id=request.session["user_id"])
+    action = Action.objects.get(id=id)
+    user.actions_to_do.remove(action)
+    return redirect('/home')
+
+def delete(request, id):
+    action = Action.objects.get(id=id)
+    action.delete()
+    return redirect('/home')
+
+def to_do(request):
+    context = {
+        "user" : User.objects.get(id=request.session["user_id"])
+    }
+    return render(request, "to_do.html", context)

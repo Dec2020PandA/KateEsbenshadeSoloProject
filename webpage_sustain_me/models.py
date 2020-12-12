@@ -28,6 +28,18 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
+class ActionManager(models.Manager):
+    def action_validator(self, postData):
+        errors = {}
+
+        if len(postData['title']) < 1:
+            errors['title'] = "Title must not be blank."
+        if len(postData['description']) < 5:
+            errors['description'] = "Description must at least 5 characters long."
+
+        return errors
+
 class Action(models.Model):
     title = models.TextField()
     topic = models.CharField(max_length=255)
@@ -36,3 +48,4 @@ class Action(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     creator = models.ForeignKey(User, related_name="actions", on_delete = models.CASCADE)
     favorited_by = models.ManyToManyField(User, related_name="actions_to_do")
+    objects = ActionManager()

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{creator.name}}'s Profile</title>
+    <title>{{user.first_name}}'s Profile</title>
     {% load static %}
     <style>
         *{
@@ -17,7 +17,19 @@
             overflow: scroll;
         }
         #logout{
-            margin: 0px 0px 3px 95%;
+            display: inline-block;
+            background-color: gray;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #to_do{
+            margin: 0px 0px 10px 85%;
+            display: inline-block;
+            background-color: gray;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
         }
         img{
             width: 100%;
@@ -80,6 +92,7 @@
             margin: 15px;
             background-image: radial-gradient(cadetblue, white);
             box-shadow: 10px 10px 3px gray;
+            width: 27%;
         }
         #content{
             background-image: linear-gradient(rgb(73, 114, 49), rgb(185, 245, 151));
@@ -91,10 +104,16 @@
             width: 200px;
             margin: 5px auto;
         }
+        #map {
+          height: 300px;
+          width: 500px;
+          margin: 0px 0px 0px -70%;
+        }
     </style>
 </head>
 <body>
     <div id=container>
+        <a id=to_do href="/to_do_list">Your To Do List</a>
         <a id=logout href="/logout">Logout</a>
         <div id=header>
             <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >
@@ -114,8 +133,34 @@
             <div id=info>
                 <h3>{{user.first_name}} {{user.last_name}}</h3>
                 <p>{{user.email}}</p>
-                <p>MAP</p>
+                <p id="location">Location: {{user.location}}</p>
+                <div id=map></div>
             </div>
+
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxIQPiRwYwbqSnZ6c3MXEO4BOn8b6WNWg&callback=initMap"
+            type="text/javascript"></script>
+            <script>
+                function initMap() {
+                  geocoder = new google.maps.Geocoder();
+                  geocoder.geocode( { 'address': document.getElementById("location").innerHTML}, function(results, status) {
+                      if (status == 'OK') {
+                          const map = new google.maps.Map(document.getElementById("map"), {
+                              zoom: 8,
+                              center: results[0].geometry.location,
+                          });
+                          var marker = new google.maps.Marker({
+                              map: map,
+                              position: results[0].geometry.location
+                          });
+                      }
+                      else {
+                          alert('Geocode was not successful for the following reason: ' + status);
+                      }
+                  });
+                  console.log("Error at alert")
+                }
+            </script>
+          
             {% for action in user.actions.all %}
                 <div class=action>
                     <h4>{{action.title}}</h4>

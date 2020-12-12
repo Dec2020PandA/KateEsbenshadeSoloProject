@@ -17,7 +17,19 @@
             overflow: scroll;
         }
         #logout{
-            margin: 0px 0px 3px 95%;
+            display: inline-block;
+            background-color: gray;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #to_do{
+            margin: 0px 0px 10px 85%;
+            display: inline-block;
+            background-color: gray;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
         }
         img{
             width: 100%;
@@ -76,10 +88,12 @@
         }
         .action{
             border: 2px solid black;
-            padding: 5px 20px;
+            padding: 5px 20px 10px 20px;
             margin: 15px;
             background-image: radial-gradient(cadetblue, white);
             box-shadow: 10px 10px 3px gray;
+            width: 27%;
+            display: inline-block;
         }
         #content{
             background-image: linear-gradient(rgb(73, 114, 49), rgb(185, 245, 151));
@@ -96,6 +110,7 @@
 </head>
 <body>
     <div id=container>
+        <a id=to_do href="/to_do_list">Your To Do List</a>
         <a id=logout href="/logout">Logout</a>
         <div id=header>
             <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >
@@ -119,8 +134,12 @@
                 <a href='/profile/{{action.topic}}'>{{action.topic}}</a>
                 <p>{{action.description}}</p>
                 <p>Posted by: <a href='/profile/{{action.creator.id}}'>{{action.creator.first_name}} {{action.creator.last_name}}</a></p>
-                {% if request.session.user_id == action.poster.id %}
+                {% if request.session.user_id == action.creator.id %}
                     <a href="/delete_action/{{action.id}}">Delete</a>
+                {% elif user in action.favorited_by.all %}
+                    <a href="/remove_to_do/{{action.id}}">Take off of To Do List!</a>
+                {% elif user not in action.favorited_by.all %}
+                    <a href="/add_to_do/{{action.id}}">Add to To Do List!</a>
                 {% endif %}
             </div>
             {% endfor %}

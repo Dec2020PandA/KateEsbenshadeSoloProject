@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add an Action!</title>
+    <title>{{user.first_name}}'s To Do List</title>
     {% load static %}
     <style>
         *{
@@ -60,7 +60,7 @@
             font-family: Helvetica, sans-serif;
             font-weight: bold;
         }
-        ul {
+        #nav {
             position: absolute;
             top: 400px;
             left: 23%;
@@ -86,6 +86,11 @@
             font-family: Helvetica, sans-serif;
             padding: 0px 5px;
         }
+        #actions li{
+            display: block;
+            padding: 5px 20px;
+            margin: 15px;
+        }
         #content{
             background-image: linear-gradient(rgb(73, 114, 49), rgb(185, 245, 151));
             padding: 5px 10px;
@@ -102,7 +107,7 @@
             <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >
             <h1 id=sustain_logo>SustainMe</h1>
             <p id=sustain_description>Transportation <> Food <> Home <> Waste <> Nature </p>
-            <ul>
+            <ul id=nav>
                 <li><a href="/home">Actions Page</a></li>
                 <li class = in_between> | </li>
                 <li><a href="/why_this_matters">Why this Matters</a></li>
@@ -113,23 +118,12 @@
             </ul>
         </div>
         <div id=content>
-            <h1>Add an Action!</h1>
-            <form id="add_action" action="/process_action" method="POST">
-                {% csrf_token %}
-                    Title:<input type="text" name="title">
-                    <br>
-                    Topic: <select name="topic">
-                        <option value="Transportation">Transportation</option>
-                        <option value="Diet">Food and Diet</option>
-                        <option value="Improvements">Home Improvements</option>
-                        <option value="Waste">Waste</option>
-                        <option value="Nature">Nature</option>
-                    </select>
-                    <br>
-                    Description:<textarea name="description" cols=40 rows=10></textarea>
-                    <input id="add_action" type=submit value="Submit">
-                </form>
-            </form>
+            <h1>Your To Do List</h1>
+            <ul id=actions>
+                {% for action in user.actions_to_do.all %}
+                <li><a href="/action_prof/{{action.id}}">{{action.title}}</a></li>
+                {% endfor %}
+            </ul>
         </div>
    </div>
 </body>
