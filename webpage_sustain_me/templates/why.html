@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Why This Matters</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     {% load static %}
     <style>
         * {
@@ -120,6 +121,11 @@
             box-shadow: 5px 5px 2px gray;
             margin: 5px 10px;
         }
+        #content h1{
+            margin: 10px auto;
+            width: 400px;
+            text-shadow: 2px 2px 2px lightgrey;
+        }
     </style>
 </head>
 <body>
@@ -152,11 +158,19 @@
             <p>Many of you may be thinking that it is corporations and governments that need to change - and that is true! But that does not mean that we, as individuals, cannot make a substantial impact on our own. Switching your diet to vegetarian can, on average, reduce your personal emissions by 30%. And if everyone did that, there would be a massive impact. As you can see above, 27% of emissions are from electricity - what if you installed solar panals or moved to 100% renewable energy? So yes, in order to fully combat this crisis, corporations and factories need to change and governments need to set regulations, but each of us can have a major impact as well. </p>
             <p>And that is where SustainMe comes in! Changing your lifestyle to become more environmentally friendly can be daunting, but a community can help. Other than doing meatless Mondays, what else can you do? You want to get a new, electrical car, but which ones are best? Connect with fellow tree huggers to collaborate on how to be more sustainable, and contribute to this fight for the future.</p>
             <div id=images>
-                <img src={% static "/images/biking.jpg" %} alt="Bike" >
-                <img src={% static "/images/compost.jpg" %} alt="Compost" >
-                <img src={% static "/images/solar.jpg" %} alt="Solar" >
-                <img src={% static "/images/transport.jpg" %} alt="Transportation" >
-                <img src={% static "/images/vegetarian.jpg" %} alt="Vegetarian" >
+                <img src={% static "/images/biking.jpg" %} backup-src={% static "/images/micro.jpg" %} alt="Bike" >
+                <img src={% static "/images/compost.jpg" %} backup-src={% static "/images/compostword.jpg" %} alt="Compost" >
+                <img src={% static "/images/solar.jpg" %} backup-src={% static "/images/energy.jpg" %} alt="Solar" >
+                <img src={% static "/images/transport.jpg" %} backup-src={% static "/images/transportword.jpg" %} alt="Transportation" >
+                <img src={% static "/images/vegetarian.jpg" %} backup-src={% static "/images/food+diet.jpg" %} alt="Vegetarian" >
+            <script>
+                $("img").hover(function(){
+                    var current=$(this).attr('src');
+                    var backup=$(this).attr('backup-src');
+                    $(this).attr('src', backup);
+                    $(this).attr('backup-src',current);
+                })
+            </script>
             </div>
         </div>
    </div>

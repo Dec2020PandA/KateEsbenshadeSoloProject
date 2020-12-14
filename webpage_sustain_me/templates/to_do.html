@@ -86,7 +86,11 @@
             font-family: Helvetica, sans-serif;
             padding: 0px 5px;
         }
-        #actions li{
+        #actions{
+            width: 400px;
+            margin: 0px auto;
+        }
+        #actions li a{
             display: block;
             padding: 5px 20px;
             margin: 15px;
@@ -96,6 +100,11 @@
             padding: 5px 10px;
             border-radius: 15px;
             margin: 10px 0px;
+        }
+        #content h1{
+            margin: 10px auto;
+            width: 300px;
+            text-shadow: 2px 2px 2px lightgrey;
         }
     </style>
 </head>
@@ -119,11 +128,11 @@
         </div>
         <div id=content>
             <h1>Your To Do List</h1>
-            <ul id=actions>
+            <ol id=actions>
                 {% for action in user.actions_to_do.all %}
                 <li><a href="/action_prof/{{action.id}}">{{action.title}}</a></li>
                 {% endfor %}
-            </ul>
+            </ol>
         </div>
    </div>
 </body>

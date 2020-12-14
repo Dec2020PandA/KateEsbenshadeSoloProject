@@ -92,7 +92,6 @@
             margin: 15px;
             background-image: radial-gradient(cadetblue, white);
             box-shadow: 10px 10px 3px gray;
-            width: 27%;
         }
         #content{
             background-image: linear-gradient(rgb(73, 114, 49), rgb(185, 245, 151));
@@ -108,6 +107,7 @@
           height: 300px;
           width: 500px;
           margin: 0px 0px 0px -70%;
+          border: 5px solid black;
         }
     </style>
 </head>
@@ -132,7 +132,7 @@
         <div id=content>
             <div id=info>
                 <h3>{{user.first_name}} {{user.last_name}}</h3>
-                <p>{{user.email}}</p>
+                Email: <a href="mailto:{{user.email}}">{{user.email}}</a>
                 <p id="location">Location: {{user.location}}</p>
                 <div id=map></div>
             </div>

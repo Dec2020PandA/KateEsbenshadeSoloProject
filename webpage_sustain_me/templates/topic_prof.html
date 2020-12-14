@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{user.first_name}}'s Profile</title>
+    <title>{{topic}}'s Profile</title>
     {% load static %}
     <style>
         *{
@@ -125,7 +125,7 @@
         </div>
         <div id=content>
             <div id=info>
-                <h3>{{topic}}</h3>
+                <h3>{{topic.topic}}</h3>
             </div>
             {% for action in topic %}
                 <div class=action>

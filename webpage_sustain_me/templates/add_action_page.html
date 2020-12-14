@@ -92,6 +92,18 @@
             border-radius: 15px;
             margin: 10px 0px;
         }
+        #add_action{
+            width: 300px;
+            margin: 10px auto;
+        }
+        .input{
+            margin: 5px 0px;
+        }
+        #content h1{
+            margin: 10px auto;
+            width: 300px;
+            text-shadow: 2px 2px 2px lightgrey;
+        }
     </style>
 </head>
 <body>
@@ -116,9 +128,9 @@
             <h1>Add an Action!</h1>
             <form id="add_action" action="/process_action" method="POST">
                 {% csrf_token %}
-                    Title:<input type="text" name="title">
+                    Title:<input class=input type="text" name="title">
                     <br>
-                    Topic: <select name="topic">
+                    Topic: <select class=input name="topic">
                         <option value="Transportation">Transportation</option>
                         <option value="Diet">Food and Diet</option>
                         <option value="Improvements">Home Improvements</option>
@@ -126,8 +138,8 @@
                         <option value="Nature">Nature</option>
                     </select>
                     <br>
-                    Description:<textarea name="description" cols=40 rows=10></textarea>
-                    <input id="add_action" type=submit value="Submit">
+                    Description:<textarea class=input name="description" cols=40 rows=10></textarea>
+                    <input class=input id="add_action" type=submit value="Submit">
                 </form>
             </form>
         </div>

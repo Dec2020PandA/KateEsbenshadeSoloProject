@@ -41,6 +41,9 @@ class ActionManager(models.Manager):
         return errors
 
 class Action(models.Model):
+    #def __init__(self, name):
+        #self.name = name
+        #self.count = self.count + 1
     title = models.TextField()
     topic = models.CharField(max_length=255)
     description = models.TextField()

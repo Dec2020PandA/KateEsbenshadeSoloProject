@@ -12,7 +12,7 @@
         #container{
             background-color: rgb(185, 245, 151);
             padding: 20px;
-            width: 100%;
+            width: 980;
             height: 100%;
             overflow: scroll;
         }
@@ -136,10 +136,10 @@
                 <p>Posted by: <a href='/profile/{{action.creator.id}}'>{{action.creator.first_name}} {{action.creator.last_name}}</a></p>
                 {% if request.session.user_id == action.creator.id %}
                     <a href="/delete_action/{{action.id}}">Delete</a>
-                {% elif user in action.favorited_by.all %}
-                    <a href="/remove_to_do/{{action.id}}">Take off of To Do List!</a>
                 {% elif user not in action.favorited_by.all %}
                     <a href="/add_to_do/{{action.id}}">Add to To Do List!</a>
+                {% elif user in action.favorited_by.all %}
+                    <a href="/remove_to_do/{{action.id}}">Take off of To Do List!</a>
                 {% endif %}
             </div>
             {% endfor %}

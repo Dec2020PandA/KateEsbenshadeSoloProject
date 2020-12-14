@@ -56,6 +56,7 @@ def home(request):
     if 'user_id' not in request.session:
         return redirect('/')
     context = {
+        'user' : User.objects.get(id=request.session['user_id']),
         'actions' : Action.objects.all
     }
     return render(request, "home.html", context)
@@ -66,8 +67,14 @@ def why(request):
 
 
 def totals(request):
+    count = Action.objects.all().count()
     context = {
-        'actions' : Action.objects.all
+        'count' : Action.objects.all().count(),
+        'transport_count' : Action.objects.filter(topic = "Transportation").count(),
+        'waste_count' : Action.objects.filter(topic = "Waste").count(),
+        'food_count' : Action.objects.filter(topic = "Diet").count(),
+        'nature_count' : Action.objects.filter(topic = "Nature").count(),
+        'home_count' : Action.objects.filter(topic = "Improvements").count(),
     }
     return render(request, "totals.html", context)
 
@@ -93,7 +100,7 @@ def profile(request, id):
 
 def topic_prof(request, topic):
     context = {
-        'topic': Action.getElementsByName('<topic>')
+        'topic': Action.objects.filter(topic=topic)
     }
     return render(request, 'topic_prof.html', context)
 
@@ -106,10 +113,7 @@ def action_prof(request, action_id):
 def add_to_do(request, id):
     user = User.objects.get(id=request.session["user_id"])
     action = Action.objects.get(id=id)
-    print(id)
     user.actions_to_do.add(action)
-    print(user)
-    print(action.favorited_by)
     return redirect('/home')
 
 def remove_to_do(request, id):

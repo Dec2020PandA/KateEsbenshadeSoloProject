@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Total Action Count</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     {% load static %}
     <style>
+        *{
+            font-family: Helvetica, sans-serif;
+        }
         #container{
             background-color: rgb(185, 245, 151);
             padding: 20px;
@@ -28,7 +32,7 @@
             padding: 5px;
             border-radius: 5px;
         }
-        img{
+        #header img{
             width: 100%;
             height: 500px;
             border-radius: 25px;
@@ -57,7 +61,7 @@
             font-family: Helvetica, sans-serif;
             font-weight: bold;
         }
-        ul {
+        #nav_bar {
             position: absolute;
             top: 400px;
             left: 23%;
@@ -68,12 +72,12 @@
             border-radius: 15px;
 
         }
-        li{
+        #header li{
             display: inline;
             font-size: 20px;
             font-family: Helvetica, sans-serif;
         }
-        li a{
+        #header .nav a{
             color: black;
             text-decoration: none;
             font-family: Helvetica, sans-serif;
@@ -83,31 +87,127 @@
             font-family: Helvetica, sans-serif;
             padding: 0px 5px;
         }
+        #content{
+            background-image: linear-gradient(rgb(73, 114, 49), rgb(185, 245, 151));
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 10px 0px;
+        }
+        #content h1{
+            margin: 10px auto;
+            width: 700px;
+            text-shadow: 2px 2px 2px lightgrey;
+        }
+        .image{
+            width: 300px;
+            display: inline-block;
+            box-shadow: 10px 10px 2px darkslategray;
+        }
+        .text{
+            font-size: 35px;
+            color: rgb(185, 245, 151);
+            background-color: rgb(0, 0, 0, 0.9);
+            padding: 10px;
+            border-radius: 25%;
+            display: inline;
+            position: relative;
+            right: 25%;
+            vertical-align: top;
+            top: 50px;
+        }
+        .title{
+            display: inline-block;
+            font-size: 25px;
+            width: 350px;
+            line-height: 200px;
+            margin: 0px;
+            vertical-align: top;
+        }
+        #transportation, #waste, #home{
+            width: 700px;
+            margin: 0px 0px 0px 600px;
+            padding: 20px;
+            border: 5px solid black;
+            background-image: repeating-linear-gradient(135deg,white,rgb(185, 245, 151) 1px, white 1px, rgb(185, 245, 151) 4px);
+        }
+        #food, #nature{
+            width: 700px;
+            margin: 5px 0px 5px 50px;
+            padding: 20px;
+            border: 5px solid black;
+            background-image: repeating-linear-gradient(135deg,white,rgb(185, 245, 151) 1px, white 1px, rgb(185, 245, 151) 4px);
+        }
     </style>
 </head>
 <body>
     <div id=container>
-        <a id=to_do href="/to_do_list">Your To Do List</a>
-        <a id=logout href="/logout">Logout</a>
-        <header>
-            <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >
-            <h1 id=sustain_logo>SustainMe</h1>
-            <p id=sustain_description>Transportation <> Food <> Home <> Waste <> Nature </p>
-            <ul>
-                <li><a href="/home">Actions Page</a></li>
-                <li class = in_between> | </li>
-                <li><a href="/why_this_matters">Why this Matters</a></li>
-                <li class = in_between> | </li>
-                <li><a href="/totals">Total Actions</a></li>
-                <li class = in_between> | </li>
-                <li><a href="/add">Add an Action</a></li>
-            </ul>
-        </header>
-        TOTALS
-        {{% for action in actions:
-                count+=1
-        %}}
-        Total Actions: {{count}}
+        <div id=header>
+            <a id=to_do href="/to_do_list">Your To Do List</a>
+            <a id=logout href="/logout">Logout</a>
+                <img src={% static "/images/earth.jpeg" %} alt="Earth Image" >
+                <h1 id=sustain_logo>SustainMe</h1>
+                <p id=sustain_description>Transportation <> Food <> Home <> Waste <> Nature </p>
+                <ul id=nav_bar>
+                    <li class=nav><a href="/home">Actions Page</a></li>
+                    <li class = in_between> | </li>
+                    <li class=nav><a href="/why_this_matters">Why this Matters</a></li>
+                    <li class = in_between> | </li>
+                    <li class=nav><a href="/totals">Total Actions</a></li>
+                    <li class = in_between> | </li>
+                    <li class=nav><a href="/add">Add an Action</a></li>
+                </ul>
+        </div>
+        <div id=content>
+            <h1>As a community, we've taken {{count}} total actions!</h1>
+            <div id=transportation class=topic>
+                <p class=title>Transportation Actions</p>
+                <img src={% static "/images/biking.jpg" %} alt="Biking" class="image">
+                <div class='text'>{{transport_count}}</div>
+            </div>
+            <div id=food class=topic>
+                <p class=title>Food and Diet Actions</p>
+                <img src={% static "/images/vegetarian.jpg" %} alt="Veggie Food" class="image">
+                <div class="text">{{food_count}}</div>
+            </div>
+            <div id=waste class=topic>
+                <p class=title>Waste Reduction Actions</p>
+                <img src={% static "/images/compost.jpg" %} alt="Compost" class="image">
+                    <div class="text">{{waste_count}}</div>
+            </div>
+            <div id=nature class=topic>
+                <p class=title>Nature Actions</p>
+                <img src={% static "/images/plant.jpg" %} alt="Plant" class="image"> 
+                <div class="text">{{nature_count}}</div>
+            </div>
+            <div id=home class=topic>
+                <p class=title>Home Improvement Actions</p>
+                <img src={% static "/images/solar.jpg" %} alt="Solar Panel" class="image">
+                <div class="text">{{home_count}}</div>
+            </div>
+        </div>
    </div>
 </body>
+  
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('.text').hide();
+        $('.image').animate({
+        });
+        $('.image').hover(function() {
+            $('.text').fadeIn();
+
+        }, function() {
+            $('.text').fadeOut();
+        });
+        $('.text-right').hide();
+        $('.image').animate({
+        });
+        $('.image').hover(function() {
+            $('.text-right').fadeIn();
+
+        }, function() {
+            $('.text-right').fadeOut();
+        });
+    });
+    </script>
 </html>
