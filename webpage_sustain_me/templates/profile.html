@@ -161,7 +161,7 @@
                 }
             </script>
           
-            {% for action in user.actions.all %}
+            {% for action in user.actions.all reversed %}
                 <div class=action>
                     <h4>{{action.title}}</h4>
                     <a href='/profile/{{action.topic}}'>{{action.topic}}</a>
